@@ -1,0 +1,19 @@
+micronaut:
+  application:
+    name: discoverRepository
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+  http:
+    services:
+      github:
+        url: 'https://api.github.com'
+netty:
+  default:
+    allocator:
+      max-order: 3

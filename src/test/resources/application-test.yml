@@ -1,0 +1,5 @@
+micronaut:
+  http:
+    services:
+      github:
+        url: 'http://localhost:9090'
