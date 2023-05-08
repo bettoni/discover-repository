@@ -20,7 +20,7 @@ public class GithubRepositoryGateway implements RepositoryGateway {
     @Override
     public List<Repository> fetchRepositories(FindRepositoryFilter filter) {
         if (filterHasInvalidLimit(filter)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid limit");
         }
 
         String queryParam = GithubQueryBuilder.createQuery(filter);
@@ -32,7 +32,7 @@ public class GithubRepositoryGateway implements RepositoryGateway {
     }
 
     private static boolean filterHasInvalidLimit(FindRepositoryFilter filter) {
-        return filter.limit() < 0 || filter.limit() > 100;
+        return filter.limit() < 1 || filter.limit() > 100;
     }
 
     private Repository toRepository(GithubRepository githubRepository) {

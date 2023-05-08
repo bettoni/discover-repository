@@ -81,4 +81,18 @@ class DiscoverRepositoryControllerTest {
                 .assertThat()
                 .body("message", is("Problem access upstream API with: Client 'github': Service Unavailable"));
     }
+
+    @Test
+    void shouldHandleIllegalArgumentAsBadRequest(RequestSpecification spec) {
+        stubFor(requestMatching(request -> MatchResult.of(request.getUrl().contains("/search/repositories")))
+                .willReturn(serviceUnavailable()));
+
+        spec.when()
+                .get("/repositories?limit=0")
+                .prettyPeek()
+                .then()
+                .statusCode(400)
+                .assertThat()
+                .body("message", is("Invalid limit"));
+    }
 }

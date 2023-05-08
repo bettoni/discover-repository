@@ -37,7 +37,7 @@ class GithubRepositoryGatewayTest {
 
     @Test
     void shouldNotAllowLimitSmallerThan0() {
-        FindRepositoryFilter filter = new FindRepositoryFilter(null, null, -1);
+        FindRepositoryFilter filter = new FindRepositoryFilter(null, null, 0);
 
         assertThatThrownBy(() -> gateway.fetchRepositories(filter))
                 .isInstanceOf(IllegalArgumentException.class);
